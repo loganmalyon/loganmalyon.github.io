@@ -127,7 +127,7 @@ button {
 .gallery-shell {
   width: min(100%, 1540px);
   margin: 0 auto;
-  padding: 18px clamp(18px, 4vw, 54px) 120px;
+  padding: 58px clamp(18px, 4vw, 54px) 120px;
 }
 
 .gallery {
@@ -434,7 +434,7 @@ button {
   }
 
   .gallery-shell {
-    padding-top: 22px;
+    padding-top: 42px;
   }
 
   .gallery {
