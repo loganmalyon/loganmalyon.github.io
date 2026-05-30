@@ -14,7 +14,6 @@ let isLightboxAnimating = false;
 const frameStyles = [
   "frame-painted",
   "frame-painted",
-  "frame-wood",
   "frame-gold",
   "frame-thin",
   "frame-tape",
@@ -73,9 +72,9 @@ function createArtworkButton(src, index) {
   const image = document.createElement("img");
   const rotation = randomBetween(-6.5, 6.5).toFixed(2);
   const shift = randomBetween(-28, 28).toFixed(0);
-  const mobileShift = randomBetween(-6, 6).toFixed(0);
+  const mobileShift = randomBetween(-3, 3).toFixed(0);
   const pull = randomBetween(-8, 24).toFixed(0);
-  const mobilePull = randomBetween(-16, 12).toFixed(0);
+  const mobilePull = randomBetween(-4, 16).toFixed(0);
   const width = randomBetween(58, 82).toFixed(0);
   const span = pick([2, 2, 2, 3, 3]);
   const mobileLayout = mobileLayoutPattern[index % mobileLayoutPattern.length];
