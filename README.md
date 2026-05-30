@@ -12,10 +12,13 @@ Open `http://localhost:8000`.
 
 ## Publish to GitHub Pages
 
-1. Create an empty GitHub repository.
-2. Push this project to the repository's `main` branch.
-3. In GitHub, open **Settings > Pages** and set **Build and deployment > Source** to **GitHub Actions**.
-4. The included workflow deploys the site after each push to `main`.
+For the public site `https://loganmalyon.github.io/`, create a repository owned by
+`loganmalyon` named exactly `loganmalyon.github.io`, then push this project to its
+`main` branch.
+
+In GitHub, open **Settings > Pages** and set **Build and deployment > Source** to
+**GitHub Actions**. The included workflow deploys the site after each push to
+`main`.
 
 The gallery uses generated cropped WebP files in `artwork/`. The original scans stay in `images/`.
 
