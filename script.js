@@ -17,17 +17,6 @@ const gallery = document.querySelector("[data-gallery]");
 const lightbox = document.querySelector("[data-lightbox]");
 const lightboxImage = document.querySelector("[data-lightbox-image]");
 const lightboxClose = document.querySelector("[data-lightbox-close]");
-const frameColors = [
-  "#263e42",
-  "#735f55",
-  "#a74f45",
-  "#c29549",
-  "#5f7965",
-  "#514761",
-  "#2f5f75",
-  "#8a6e32",
-  "#963f62",
-];
 
 function shuffle(items) {
   const shuffled = [...items];
@@ -48,11 +37,6 @@ function pick(values) {
   return values[Math.floor(Math.random() * values.length)];
 }
 
-function makeFrameRadius() {
-  const corners = Array.from({ length: 8 }, () => randomBetween(3, 12).toFixed(0));
-  return `${corners[0]}px ${corners[1]}px ${corners[2]}px ${corners[3]}px / ${corners[4]}px ${corners[5]}px ${corners[6]}px ${corners[7]}px`;
-}
-
 function createArtworkButton(src, index) {
   const button = document.createElement("button");
   const image = document.createElement("img");
@@ -63,11 +47,6 @@ function createArtworkButton(src, index) {
   const mobilePull = randomBetween(-16, 12).toFixed(0);
   const width = randomBetween(68, 90).toFixed(0);
   const span = pick([2, 2, 2, 3, 3, 3, 4]);
-  const frameWidth = randomBetween(4, 10).toFixed(0);
-  const frameColor = pick(frameColors);
-  const frameRadiusBase = `${randomBetween(2, 7).toFixed(0)}px`;
-  const frameOffset = `-${Math.max(2, Math.round(Number(frameWidth) * 0.55))}px`;
-  const frameWobble = randomBetween(-1.1, 1.1).toFixed(2);
 
   button.type = "button";
   button.className = "art-card";
@@ -78,13 +57,6 @@ function createArtworkButton(src, index) {
   button.style.setProperty("--mobile-pull", `${mobilePull}px`);
   button.style.setProperty("--width", `${width}%`);
   button.style.setProperty("--span", span);
-  button.style.setProperty("--frame-width", `${frameWidth}px`);
-  button.style.setProperty("--frame-color", frameColor);
-  button.style.setProperty("--frame-line", "rgba(25, 39, 43, 0.22)");
-  button.style.setProperty("--frame-radius", makeFrameRadius());
-  button.style.setProperty("--frame-radius-base", frameRadiusBase);
-  button.style.setProperty("--frame-offset", frameOffset);
-  button.style.setProperty("--frame-wobble", `${frameWobble}deg`);
   button.style.setProperty("--z", String(Math.floor(randomBetween(1, 20))));
   button.setAttribute("aria-label", `Open artwork ${index + 1}`);
 
