@@ -30,6 +30,7 @@ const frameColors = [
   "#cf5f8b",
   "#efb84f",
 ];
+const mobileSpanPattern = [4, 4, 5, 3, 6, 3, 3, 5, 4, 4, 7, 3, 5, 3, 4, 4];
 
 function shuffle(items) {
   const shuffled = [...items];
@@ -60,8 +61,8 @@ function createArtworkButton(src, index) {
   const mobilePull = randomBetween(-16, 12).toFixed(0);
   const width = randomBetween(58, 82).toFixed(0);
   const span = pick([2, 2, 2, 3, 3]);
-  const mobileSpan = pick([2, 3, 3, 3, 3, 4, 4]);
-  const mobileWidth = randomBetween(86, 104).toFixed(0);
+  const mobileSpan = mobileSpanPattern[index % mobileSpanPattern.length];
+  const mobileWidth = randomBetween(mobileSpan > 5 ? 84 : 90, 102).toFixed(0);
   const frameStyle = pick(frameStyles);
   const frameWidth = randomBetween(5, frameStyle === "frame-gold" ? 18 : 12).toFixed(0);
   const frameColor = pick(frameColors);
