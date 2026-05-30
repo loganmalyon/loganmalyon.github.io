@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://loganmalyon.github.io/sitemap.xml
