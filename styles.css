@@ -490,16 +490,17 @@ button {
   }
 
   .gallery {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    row-gap: 18px;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    row-gap: 16px;
+    column-gap: 0;
   }
 
   .art-card,
   .art-card:nth-child(4n + 2),
   .art-card:nth-child(5n + 3),
   .art-card:nth-child(7n + 1) {
-    grid-column: span 3;
-    width: min(100%, 72vw);
+    grid-column: span var(--mobile-span);
+    width: min(100%, var(--mobile-width));
     margin-top: var(--mobile-pull);
     margin-left: var(--mobile-shift);
   }

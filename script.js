@@ -60,6 +60,8 @@ function createArtworkButton(src, index) {
   const mobilePull = randomBetween(-16, 12).toFixed(0);
   const width = randomBetween(58, 82).toFixed(0);
   const span = pick([2, 2, 2, 3, 3]);
+  const mobileSpan = pick([2, 3, 3, 3, 3, 4, 4]);
+  const mobileWidth = randomBetween(86, 104).toFixed(0);
   const frameStyle = pick(frameStyles);
   const frameWidth = randomBetween(5, frameStyle === "frame-gold" ? 18 : 12).toFixed(0);
   const frameColor = pick(frameColors);
@@ -77,6 +79,8 @@ function createArtworkButton(src, index) {
   button.style.setProperty("--mobile-pull", `${mobilePull}px`);
   button.style.setProperty("--width", `${width}%`);
   button.style.setProperty("--span", span);
+  button.style.setProperty("--mobile-span", mobileSpan);
+  button.style.setProperty("--mobile-width", `${mobileWidth}%`);
   button.style.setProperty("--frame-width", `${frameWidth}px`);
   button.style.setProperty("--frame-color", frameColor);
   button.style.setProperty("--frame-accent", frameAccent);
