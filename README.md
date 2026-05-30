@@ -17,9 +17,9 @@ Open `http://localhost:8000`.
 3. In GitHub, open **Settings > Pages** and set **Build and deployment > Source** to **GitHub Actions**.
 4. The included workflow deploys the site after each push to `main`.
 
-The gallery uses generated transparent WebP files in `artwork/`. The original scans stay in `images/`.
+The gallery uses generated cropped WebP files in `artwork/`. The original scans stay in `images/`.
 
-If more scans are added later, regenerate the transparent gallery assets:
+If more scans are added later, regenerate the cropped gallery assets:
 
 ```bash
 python3 tools/crop_artwork.py

@@ -79,10 +79,10 @@ def crop_box_for(image):
 
 def save_cropped(source, target):
     image = Image.open(source).convert("RGB")
-    transparent = alpha_removed_paper(image)
-    cropped = transparent.crop(crop_box_for(transparent))
+    mask_source = alpha_removed_paper(image)
+    cropped = image.crop(crop_box_for(mask_source))
     cropped.thumbnail((OUTPUT_SIZE, OUTPUT_SIZE), Image.Resampling.LANCZOS)
-    cropped.save(target, "WEBP", quality=86, method=2)
+    cropped.save(target, "WEBP", quality=88, method=2)
     return image.size, cropped.size
 
 
