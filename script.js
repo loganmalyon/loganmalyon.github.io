@@ -8,6 +8,9 @@ const gallery = document.querySelector("[data-gallery]");
 const lightbox = document.querySelector("[data-lightbox]");
 const lightboxImage = document.querySelector("[data-lightbox-image]");
 const lightboxClose = document.querySelector("[data-lightbox-close]");
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+let activeThumbnail = null;
+let isLightboxAnimating = false;
 const frameStyles = [
   "frame-painted",
   "frame-painted",
@@ -90,18 +93,114 @@ function createArtworkButton(src, index) {
   image.addEventListener("error", () => button.remove(), { once: true });
 
   button.append(image);
-  button.addEventListener("click", () => openLightbox(src, image.alt));
+  button.addEventListener("click", () => openLightbox(src, image.alt, image));
 
   return button;
 }
 
-function openLightbox(src, alt) {
-  lightboxImage.src = src;
-  lightboxImage.alt = alt;
-  lightbox.showModal();
+function nextFrame() {
+  return new Promise((resolve) => requestAnimationFrame(resolve));
 }
 
-function closeLightbox() {
+function waitForImage(image) {
+  if (image.complete && image.naturalWidth > 0) {
+    return Promise.resolve();
+  }
+
+  if (image.decode) {
+    return image.decode().catch(() => {});
+  }
+
+  return new Promise((resolve) => {
+    image.addEventListener("load", resolve, { once: true });
+    image.addEventListener("error", resolve, { once: true });
+  });
+}
+
+async function animateImageBetween(src, fromRect, toRect, duration) {
+  const clone = document.createElement("img");
+  clone.className = "lightbox__clone";
+  clone.src = src;
+  clone.alt = "";
+  clone.setAttribute("aria-hidden", "true");
+  document.body.append(clone);
+
+  const start = {
+    left: `${fromRect.left}px`,
+    top: `${fromRect.top}px`,
+    width: `${fromRect.width}px`,
+    height: `${fromRect.height}px`,
+    opacity: "0.96",
+  };
+  const end = {
+    left: `${toRect.left}px`,
+    top: `${toRect.top}px`,
+    width: `${toRect.width}px`,
+    height: `${toRect.height}px`,
+    opacity: "1",
+  };
+
+  Object.assign(clone.style, start);
+
+  if (!clone.animate || prefersReducedMotion.matches) {
+    Object.assign(clone.style, end);
+    await new Promise((resolve) =>
+      setTimeout(resolve, prefersReducedMotion.matches ? 0 : duration),
+    );
+    clone.remove();
+    return;
+  }
+
+  const animation = clone.animate([start, end], {
+    duration,
+    easing: "cubic-bezier(0.2, 0.75, 0.2, 1)",
+    fill: "forwards",
+  });
+
+  await animation.finished.catch(() => {});
+  clone.remove();
+}
+
+async function openLightbox(src, alt, thumbnail) {
+  if (isLightboxAnimating) {
+    return;
+  }
+
+  isLightboxAnimating = true;
+  activeThumbnail = thumbnail;
+  const startRect = thumbnail.getBoundingClientRect();
+
+  lightboxImage.src = src;
+  lightboxImage.alt = alt;
+  lightboxImage.classList.add("is-animating");
+  lightbox.showModal();
+
+  await waitForImage(lightboxImage);
+  await nextFrame();
+  await nextFrame();
+
+  const endRect = lightboxImage.getBoundingClientRect();
+  await animateImageBetween(src, startRect, endRect, 380);
+
+  lightboxImage.classList.remove("is-animating");
+  isLightboxAnimating = false;
+}
+
+async function closeLightbox() {
+  if (!lightbox.open || isLightboxAnimating) {
+    return;
+  }
+
+  const startRect = lightboxImage.getBoundingClientRect();
+  const endRect = activeThumbnail?.getBoundingClientRect();
+
+  if (endRect && endRect.width > 0 && endRect.height > 0) {
+    isLightboxAnimating = true;
+    lightboxImage.classList.add("is-animating");
+    await animateImageBetween(lightboxImage.src, startRect, endRect, 260);
+    isLightboxAnimating = false;
+  }
+
   lightbox.close();
 }
 
@@ -110,6 +209,11 @@ shuffle(artworks).forEach((src, index) => {
 });
 
 lightboxClose.addEventListener("click", closeLightbox);
+
+lightbox.addEventListener("cancel", (event) => {
+  event.preventDefault();
+  closeLightbox();
+});
 
 lightbox.addEventListener("click", (event) => {
   const box = lightboxImage.getBoundingClientRect();
@@ -126,6 +230,9 @@ lightbox.addEventListener("click", (event) => {
 });
 
 lightbox.addEventListener("close", () => {
+  lightboxImage.classList.remove("is-animating");
   lightboxImage.removeAttribute("src");
   lightboxImage.alt = "";
+  activeThumbnail = null;
+  isLightboxAnimating = false;
 });
