@@ -62,8 +62,8 @@ button {
 
 .site-header {
   display: grid;
-  place-items: center;
-  padding: 28px 16px 22px;
+  justify-items: center;
+  padding: 28px clamp(18px, 4vw, 54px) 34px;
 }
 
 .site-title {
@@ -81,10 +81,53 @@ button {
   text-decoration: none;
 }
 
+.artist-intro {
+  display: grid;
+  grid-template-columns: minmax(150px, 220px) minmax(280px, 520px);
+  align-items: center;
+  gap: clamp(22px, 4vw, 54px);
+  width: min(100%, 820px);
+  margin-top: 28px;
+}
+
+.profile-photo {
+  display: block;
+  width: min(100%, 220px);
+  aspect-ratio: 1;
+  object-fit: cover;
+  object-position: 50% 36%;
+  border: 8px solid #fbfdff;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 1px rgba(54, 72, 75, 0.14),
+    0 18px 34px -26px var(--shadow-strong);
+}
+
+.artist-bio {
+  color: #32403f;
+  font-family:
+    "Iowan Old Style",
+    Georgia,
+    Cambria,
+    "Times New Roman",
+    Times,
+    serif;
+  font-size: clamp(1rem, 1.2vw, 1.13rem);
+  line-height: 1.55;
+}
+
+.artist-bio p {
+  margin: 0;
+}
+
+.artist-bio p + p {
+  margin-top: 0.9em;
+}
+
 .gallery-shell {
   width: min(100%, 1540px);
   margin: 0 auto;
-  padding: 30px clamp(18px, 4vw, 54px) 120px;
+  padding: 18px clamp(18px, 4vw, 54px) 120px;
 }
 
 .gallery {
@@ -348,6 +391,11 @@ button {
     padding-top: 24px;
   }
 
+  .artist-intro {
+    grid-template-columns: minmax(132px, 180px) minmax(240px, 1fr);
+    width: min(100%, 720px);
+  }
+
   .gallery {
     grid-template-columns: repeat(8, minmax(0, 1fr));
   }
@@ -365,6 +413,24 @@ button {
 
   .site-title {
     font-size: 2.25rem;
+  }
+
+  .artist-intro {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    justify-items: center;
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .profile-photo {
+    width: min(58vw, 190px);
+    border-width: 7px;
+  }
+
+  .artist-bio {
+    max-width: 34rem;
+    font-size: 0.98rem;
   }
 
   .gallery-shell {
