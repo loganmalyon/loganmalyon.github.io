@@ -118,32 +118,30 @@ function waitForImage(image) {
 }
 
 async function animateImageBetween(src, fromRect, toRect, duration) {
+  const fromArea = fromRect.width * fromRect.height;
+  const toArea = toRect.width * toRect.height;
+  const baseRect = fromArea > toArea ? fromRect : toRect;
+  const transformFor = (rect) =>
+    `translate3d(${rect.left - baseRect.left}px, ${rect.top - baseRect.top}px, 0) ` +
+    `scale(${rect.width / baseRect.width}, ${rect.height / baseRect.height})`;
   const clone = document.createElement("img");
   clone.className = "lightbox__clone";
   clone.src = src;
   clone.alt = "";
   clone.setAttribute("aria-hidden", "true");
+  Object.assign(clone.style, {
+    left: `${baseRect.left}px`,
+    top: `${baseRect.top}px`,
+    width: `${baseRect.width}px`,
+    height: `${baseRect.height}px`,
+    transform: transformFor(fromRect),
+  });
   document.body.append(clone);
-
-  const start = {
-    left: `${fromRect.left}px`,
-    top: `${fromRect.top}px`,
-    width: `${fromRect.width}px`,
-    height: `${fromRect.height}px`,
-    opacity: "0.96",
-  };
-  const end = {
-    left: `${toRect.left}px`,
-    top: `${toRect.top}px`,
-    width: `${toRect.width}px`,
-    height: `${toRect.height}px`,
-    opacity: "1",
-  };
-
-  Object.assign(clone.style, start);
+  await waitForImage(clone);
+  await nextFrame();
 
   if (!clone.animate || prefersReducedMotion.matches) {
-    Object.assign(clone.style, end);
+    clone.style.transform = transformFor(toRect);
     await new Promise((resolve) =>
       setTimeout(resolve, prefersReducedMotion.matches ? 0 : duration),
     );
@@ -151,11 +149,21 @@ async function animateImageBetween(src, fromRect, toRect, duration) {
     return;
   }
 
-  const animation = clone.animate([start, end], {
-    duration,
-    easing: "cubic-bezier(0.2, 0.75, 0.2, 1)",
-    fill: "forwards",
-  });
+  const animation = clone.animate(
+    [
+      {
+        transform: transformFor(fromRect),
+      },
+      {
+        transform: transformFor(toRect),
+      },
+    ],
+    {
+      duration,
+      easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+      fill: "forwards",
+    },
+  );
 
   await animation.finished.catch(() => {});
   clone.remove();

@@ -416,6 +416,9 @@ button {
   border-radius: 4px;
   object-fit: contain;
   pointer-events: none;
+  transform-origin: top left;
+  backface-visibility: hidden;
+  will-change: transform;
 }
 
 .lightbox__close:focus-visible {
