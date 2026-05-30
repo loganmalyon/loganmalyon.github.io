@@ -122,26 +122,37 @@ async function animateImageBetween(src, fromRect, toRect, duration) {
   const toArea = toRect.width * toRect.height;
   const baseRect = fromArea > toArea ? fromRect : toRect;
   const transformFor = (rect) =>
-    `translate3d(${rect.left - baseRect.left}px, ${rect.top - baseRect.top}px, 0) ` +
-    `scale(${rect.width / baseRect.width}, ${rect.height / baseRect.height})`;
-  const clone = document.createElement("img");
+    `translate3d(${rect.left - baseRect.left}px, ${rect.top - baseRect.top}px, 0)`;
+  const clipFor = (rect) => {
+    const right = Math.max(0, baseRect.width - rect.width);
+    const bottom = Math.max(0, baseRect.height - rect.height);
+    return `inset(0 ${right}px ${bottom}px 0)`;
+  };
+  const clone = document.createElement("div");
+  const cloneImage = document.createElement("img");
+
   clone.className = "lightbox__clone";
-  clone.src = src;
-  clone.alt = "";
   clone.setAttribute("aria-hidden", "true");
+  cloneImage.className = "lightbox__clone-image";
+  cloneImage.src = src;
+  cloneImage.alt = "";
+  clone.append(cloneImage);
+
   Object.assign(clone.style, {
     left: `${baseRect.left}px`,
     top: `${baseRect.top}px`,
     width: `${baseRect.width}px`,
     height: `${baseRect.height}px`,
     transform: transformFor(fromRect),
+    clipPath: clipFor(fromRect),
   });
   document.body.append(clone);
-  await waitForImage(clone);
+  await waitForImage(cloneImage);
   await nextFrame();
 
   if (!clone.animate || prefersReducedMotion.matches) {
     clone.style.transform = transformFor(toRect);
+    clone.style.clipPath = clipFor(toRect);
     await new Promise((resolve) =>
       setTimeout(resolve, prefersReducedMotion.matches ? 0 : duration),
     );
@@ -153,9 +164,11 @@ async function animateImageBetween(src, fromRect, toRect, duration) {
     [
       {
         transform: transformFor(fromRect),
+        clipPath: clipFor(fromRect),
       },
       {
         transform: transformFor(toRect),
+        clipPath: clipFor(toRect),
       },
     ],
     {

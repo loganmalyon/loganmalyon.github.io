@@ -194,8 +194,7 @@ button {
   transform-origin: 50% 50%;
   transition:
     transform 180ms ease,
-    box-shadow 180ms ease,
-    filter 180ms ease;
+    box-shadow 180ms ease;
   z-index: var(--z);
   appearance: none;
   -webkit-appearance: none;
@@ -218,7 +217,6 @@ button {
 
 .art-card:hover,
 .art-card:focus-visible {
-  filter: saturate(1.06);
   transform: translateY(-6px) rotate(calc(var(--rotate) * 0.45)) scale(1.025);
   z-index: 99;
 }
@@ -235,7 +233,6 @@ button {
   width: 100%;
   height: auto;
   border-radius: 2px;
-  filter: drop-shadow(0 11px 10px rgba(21, 38, 46, 0.12));
 }
 
 .frame-painted {
@@ -358,7 +355,6 @@ button {
 
 .lightbox::backdrop {
   background: rgba(211, 232, 241, 0.78);
-  backdrop-filter: blur(8px);
 }
 
 .lightbox__image {
@@ -411,14 +407,20 @@ button {
 .lightbox__clone {
   position: fixed;
   z-index: 1000;
-  display: block;
   margin: 0;
   border-radius: 4px;
-  object-fit: contain;
+  overflow: hidden;
   pointer-events: none;
-  transform-origin: top left;
+  transform-origin: 0 0;
   backface-visibility: hidden;
-  will-change: transform;
+  will-change: transform, clip-path;
+}
+
+.lightbox__clone-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .lightbox__close:focus-visible {
