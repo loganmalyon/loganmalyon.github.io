@@ -64,6 +64,7 @@ function createArtworkButton(src, index) {
   image.alt = `Artwork ${index + 1}`;
   image.decoding = "async";
   image.loading = index < 8 ? "eager" : "lazy";
+  image.addEventListener("error", () => button.remove(), { once: true });
 
   button.append(image);
   button.addEventListener("click", () => openLightbox(src, image.alt));
