@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      name="description"
+      content="A scrolling artist portfolio with a loose, overlapping wall of work."
+    >
+    <title>Logan | Artist Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header" aria-label="Site header">
+      <a class="site-title" href="./" aria-label="Logan home">Logan</a>
+      <p class="site-note">Selected works</p>
+    </header>
+
+    <main>
+      <section class="gallery-shell" aria-label="Artwork gallery">
+        <div class="gallery" data-gallery></div>
+      </section>
+    </main>
+
+    <dialog class="lightbox" data-lightbox aria-label="Artwork preview">
+      <button class="lightbox__close" type="button" data-lightbox-close aria-label="Close preview">
+        <span aria-hidden="true">×</span>
+      </button>
+      <img class="lightbox__image" data-lightbox-image alt="">
+    </dialog>
+
+    <script src="script.js"></script>
+  </body>
+</html>
