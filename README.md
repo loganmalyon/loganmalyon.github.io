@@ -17,8 +17,7 @@ For the public site `https://loganmalyon.github.io/`, create a repository owned 
 `main` branch.
 
 In GitHub, open **Settings > Pages** and set **Build and deployment > Source** to
-**GitHub Actions**. The included workflow deploys the site after each push to
-`main`.
+**Deploy from a branch**. Select branch `main` and folder `/ (root)`, then save.
 
 The gallery uses generated cropped WebP files in `artwork/`. The original scans stay in `images/`.
 
