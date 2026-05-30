@@ -491,16 +491,17 @@ button {
 
   .gallery {
     grid-template-columns: repeat(8, minmax(0, 1fr));
-    grid-auto-flow: dense;
     row-gap: 14px;
     column-gap: 2px;
+    justify-items: center;
   }
 
   .art-card,
   .art-card:nth-child(4n + 2),
   .art-card:nth-child(5n + 3),
   .art-card:nth-child(7n + 1) {
-    grid-column: span var(--mobile-span);
+    grid-column: var(--mobile-column);
+    justify-self: center;
     width: min(100%, var(--mobile-width));
     margin-top: var(--mobile-pull);
     margin-left: var(--mobile-shift);
@@ -512,7 +513,7 @@ button {
   }
 
   .art-card:nth-child(even) {
-    justify-self: end;
+    justify-self: center;
   }
 
   .lightbox__close {

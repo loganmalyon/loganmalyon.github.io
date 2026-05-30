@@ -30,7 +30,24 @@ const frameColors = [
   "#cf5f8b",
   "#efb84f",
 ];
-const mobileSpanPattern = [4, 4, 5, 3, 6, 3, 3, 5, 4, 4, 7, 3, 5, 3, 4, 4];
+const mobileLayoutPattern = [
+  { start: 1, span: 4 },
+  { start: 5, span: 4 },
+  { start: 1, span: 5 },
+  { start: 6, span: 3 },
+  { start: 2, span: 6 },
+  { start: 2, span: 3 },
+  { start: 5, span: 3 },
+  { start: 3, span: 5 },
+  { start: 1, span: 4 },
+  { start: 5, span: 4 },
+  { start: 2, span: 7 },
+  { start: 2, span: 3 },
+  { start: 5, span: 3 },
+  { start: 1, span: 5 },
+  { start: 6, span: 3 },
+  { start: 3, span: 4 },
+];
 
 function shuffle(items) {
   const shuffled = [...items];
@@ -56,13 +73,13 @@ function createArtworkButton(src, index) {
   const image = document.createElement("img");
   const rotation = randomBetween(-6.5, 6.5).toFixed(2);
   const shift = randomBetween(-28, 28).toFixed(0);
-  const mobileShift = randomBetween(-12, 12).toFixed(0);
+  const mobileShift = randomBetween(-6, 6).toFixed(0);
   const pull = randomBetween(-8, 24).toFixed(0);
   const mobilePull = randomBetween(-16, 12).toFixed(0);
   const width = randomBetween(58, 82).toFixed(0);
   const span = pick([2, 2, 2, 3, 3]);
-  const mobileSpan = mobileSpanPattern[index % mobileSpanPattern.length];
-  const mobileWidth = randomBetween(mobileSpan > 5 ? 84 : 90, 102).toFixed(0);
+  const mobileLayout = mobileLayoutPattern[index % mobileLayoutPattern.length];
+  const mobileWidth = randomBetween(mobileLayout.span > 5 ? 76 : 78, 100).toFixed(0);
   const frameStyle = pick(frameStyles);
   const frameWidth = randomBetween(5, frameStyle === "frame-gold" ? 18 : 12).toFixed(0);
   const frameColor = pick(frameColors);
@@ -80,7 +97,10 @@ function createArtworkButton(src, index) {
   button.style.setProperty("--mobile-pull", `${mobilePull}px`);
   button.style.setProperty("--width", `${width}%`);
   button.style.setProperty("--span", span);
-  button.style.setProperty("--mobile-span", mobileSpan);
+  button.style.setProperty(
+    "--mobile-column",
+    `${mobileLayout.start} / span ${mobileLayout.span}`,
+  );
   button.style.setProperty("--mobile-width", `${mobileWidth}%`);
   button.style.setProperty("--frame-width", `${frameWidth}px`);
   button.style.setProperty("--frame-color", frameColor);
