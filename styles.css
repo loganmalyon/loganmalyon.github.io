@@ -85,8 +85,6 @@ main {
   transform:
     translate3d(0, 0, 0)
     rotate(var(--squiggle-rotation));
-  animation: squiggle-drift var(--squiggle-speed) ease-in-out infinite alternate;
-  will-change: transform;
 }
 
 .squiggle path {
@@ -95,7 +93,13 @@ main {
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: var(--squiggle-stroke);
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  opacity: 0;
   vector-effect: non-scaling-stroke;
+  animation: squiggle-draw var(--squiggle-speed) ease-in-out infinite;
+  animation-delay: var(--squiggle-delay);
+  will-change: stroke-dashoffset, opacity;
 }
 
 .squiggle--one {
@@ -103,11 +107,8 @@ main {
   --squiggle-opacity: 0.48;
   --squiggle-rotation: -7deg;
   --squiggle-stroke: 1.2;
-  --squiggle-speed: 26s;
-  --squiggle-bend-x: 43px;
-  --squiggle-bend-y: 15px;
-  --squiggle-drift-x: 78px;
-  --squiggle-drift-y: -44px;
+  --squiggle-speed: 12s;
+  --squiggle-delay: -1s;
   top: 11vh;
   left: -7vw;
 }
@@ -117,11 +118,8 @@ main {
   --squiggle-opacity: 0.39;
   --squiggle-rotation: 12deg;
   --squiggle-stroke: 1.35;
-  --squiggle-speed: 24s;
-  --squiggle-bend-x: -18px;
-  --squiggle-bend-y: -36px;
-  --squiggle-drift-x: -64px;
-  --squiggle-drift-y: 68px;
+  --squiggle-speed: 10s;
+  --squiggle-delay: -5s;
   top: 23vh;
   right: 6vw;
 }
@@ -131,11 +129,8 @@ main {
   --squiggle-opacity: 0.34;
   --squiggle-rotation: 4deg;
   --squiggle-stroke: 1.1;
-  --squiggle-speed: 31s;
-  --squiggle-bend-x: 52px;
-  --squiggle-bend-y: -24px;
-  --squiggle-drift-x: 96px;
-  --squiggle-drift-y: 54px;
+  --squiggle-speed: 14s;
+  --squiggle-delay: -7s;
   top: 49vh;
   left: 11vw;
 }
@@ -145,11 +140,8 @@ main {
   --squiggle-opacity: 0.36;
   --squiggle-rotation: -18deg;
   --squiggle-stroke: 1.25;
-  --squiggle-speed: 28s;
-  --squiggle-bend-x: -46px;
-  --squiggle-bend-y: 20px;
-  --squiggle-drift-x: -82px;
-  --squiggle-drift-y: -58px;
+  --squiggle-speed: 11s;
+  --squiggle-delay: -3s;
   right: -2vw;
   bottom: 17vh;
 }
@@ -159,11 +151,8 @@ main {
   --squiggle-opacity: 0.35;
   --squiggle-rotation: 19deg;
   --squiggle-stroke: 1.15;
-  --squiggle-speed: 34s;
-  --squiggle-bend-x: 28px;
-  --squiggle-bend-y: 38px;
-  --squiggle-drift-x: 70px;
-  --squiggle-drift-y: -72px;
+  --squiggle-speed: 15s;
+  --squiggle-delay: -9s;
   bottom: 5vh;
   left: 3vw;
 }
@@ -173,26 +162,35 @@ main {
   --squiggle-opacity: 0.3;
   --squiggle-rotation: -3deg;
   --squiggle-stroke: 1.2;
-  --squiggle-speed: 29s;
-  --squiggle-bend-x: -32px;
-  --squiggle-bend-y: -22px;
-  --squiggle-drift-x: -62px;
-  --squiggle-drift-y: 60px;
+  --squiggle-speed: 13s;
+  --squiggle-delay: -11s;
   top: 72vh;
   right: 20vw;
 }
 
-@keyframes squiggle-drift {
-  45% {
-    transform:
-      translate3d(var(--squiggle-bend-x), var(--squiggle-bend-y), 0)
-      rotate(calc(var(--squiggle-rotation) + 5deg));
+@keyframes squiggle-draw {
+  0% {
+    stroke-dashoffset: 1;
+    opacity: 0;
   }
 
-  to {
-    transform:
-      translate3d(var(--squiggle-drift-x), var(--squiggle-drift-y), 0)
-      rotate(calc(var(--squiggle-rotation) - 6deg));
+  14% {
+    opacity: 0.45;
+  }
+
+  48% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+
+  74% {
+    stroke-dashoffset: 0;
+    opacity: 0.78;
+  }
+
+  100% {
+    stroke-dashoffset: -1;
+    opacity: 0;
   }
 }
 
@@ -671,7 +669,9 @@ main {
     animation-iteration-count: 1 !important;
   }
 
-  .squiggle {
+  .squiggle path {
     animation: none !important;
+    opacity: 0.55;
+    stroke-dashoffset: 0;
   }
 }
