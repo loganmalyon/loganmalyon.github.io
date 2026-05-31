@@ -113,15 +113,13 @@ main {
 .site-title {
   color: inherit;
   font-family:
-    Didot,
-    "Bodoni 72",
-    "Bodoni 72 Smallcaps",
-    "Iowan Old Style",
-    Georgia,
-    serif;
-  font-size: clamp(2.25rem, 4.2vw, 4.9rem);
+    "Rock Salt",
+    "Bradley Hand",
+    "Segoe Print",
+    cursive;
+  font-size: 3.05rem;
   font-weight: 400;
-  line-height: 0.9;
+  line-height: 1.2;
   text-decoration: none;
 }
 
@@ -480,7 +478,7 @@ main {
   }
 
   .site-title {
-    font-size: 2.25rem;
+    font-size: 1.72rem;
   }
 
   .artist-intro {
