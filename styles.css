@@ -235,6 +235,30 @@ button {
   border-radius: 2px;
 }
 
+.frame-ornate {
+  border: 0;
+  padding: var(--ornate-pad-y) var(--ornate-pad-x);
+  background: transparent;
+  box-shadow: 0 22px 34px -25px var(--shadow-strong);
+}
+
+.frame-ornate > img:not(.ornate-frame__image) {
+  position: relative;
+  z-index: 1;
+}
+
+.ornate-frame__image {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  object-fit: fill;
+  pointer-events: none;
+  user-select: none;
+}
+
 .frame-painted {
   border-color: var(--frame-color);
   border-style: solid;
@@ -492,6 +516,10 @@ button {
 
   .art-card.frame-gold {
     border-width: 10px;
+  }
+
+  .art-card.frame-ornate {
+    padding: 9% 10%;
   }
 
   .art-card:nth-child(even) {

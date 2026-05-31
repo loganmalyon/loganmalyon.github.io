@@ -3,6 +3,12 @@ const artworks = Array.from(
   { length: artworkCount },
   (_, index) => `artwork/artwork-${String(index + 1).padStart(2, "0")}.webp`,
 );
+const ornateFrameCount = 9;
+const ornateFrames = Array.from(
+  { length: ornateFrameCount },
+  (_, index) =>
+    `ornate_frames/transparent/ornate-frame-${String(index + 1).padStart(2, "0")}.png`,
+);
 
 const gallery = document.querySelector("[data-gallery]");
 const lightbox = document.querySelector("[data-lightbox]");
@@ -18,6 +24,8 @@ const frameStyles = [
   "frame-thin",
   "frame-tape",
   "frame-gallery",
+  "frame-ornate",
+  "frame-ornate",
 ];
 const frameColors = [
   "#153d4f",
@@ -80,11 +88,14 @@ function createArtworkButton(src, index) {
   const mobileLayout = mobileLayoutPattern[index % mobileLayoutPattern.length];
   const mobileWidth = randomBetween(mobileLayout.span > 5 ? 76 : 78, 100).toFixed(0);
   const frameStyle = pick(frameStyles);
+  const ornateFrame = frameStyle === "frame-ornate" ? pick(ornateFrames) : "";
   const frameWidth = randomBetween(5, frameStyle === "frame-gold" ? 18 : 12).toFixed(0);
   const frameColor = pick(frameColors);
   const frameAccent = pick(frameColors.filter((color) => color !== frameColor));
   const frameOffset = `-${Math.max(4, Math.round(Number(frameWidth) * 0.7))}px`;
   const frameTilt = randomBetween(-2.2, 2.2).toFixed(2);
+  const ornatePadX = randomBetween(12, 17).toFixed(1);
+  const ornatePadY = randomBetween(11, 15).toFixed(1);
   const tapeColor = pick(["#efcf70", "#f4b2be", "#b9d7a8", "#9cc6d9", "#f2a65f"]);
 
   button.type = "button";
@@ -106,6 +117,8 @@ function createArtworkButton(src, index) {
   button.style.setProperty("--frame-accent", frameAccent);
   button.style.setProperty("--frame-offset", frameOffset);
   button.style.setProperty("--frame-tilt", `${frameTilt}deg`);
+  button.style.setProperty("--ornate-pad-x", `${ornatePadX}%`);
+  button.style.setProperty("--ornate-pad-y", `${ornatePadY}%`);
   button.style.setProperty("--tape-color", tapeColor);
   button.style.setProperty("--z", String(Math.floor(randomBetween(1, 20))));
   button.setAttribute("aria-label", `Open artwork ${index + 1}`);
@@ -117,6 +130,19 @@ function createArtworkButton(src, index) {
   image.addEventListener("error", () => button.remove(), { once: true });
 
   button.append(image);
+
+  if (ornateFrame) {
+    const frame = document.createElement("img");
+    frame.className = "ornate-frame__image";
+    frame.src = ornateFrame;
+    frame.alt = "";
+    frame.decoding = "async";
+    frame.loading = index < 8 ? "eager" : "lazy";
+    frame.setAttribute("aria-hidden", "true");
+    frame.addEventListener("error", () => frame.remove(), { once: true });
+    button.append(frame);
+  }
+
   button.addEventListener("click", () => openLightbox(src, image.alt, image));
 
   return button;
