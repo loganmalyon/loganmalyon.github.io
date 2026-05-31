@@ -68,6 +68,13 @@ main {
   z-index: 1;
 }
 
+.squiggle-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
 .squiggle-field {
   position: fixed;
   inset: 0;
@@ -80,9 +87,10 @@ main {
   position: absolute;
   width: var(--squiggle-size);
   height: auto;
-  color: rgba(24, 116, 198, 0.28);
+  color: rgba(21, 107, 192, 0.3);
   opacity: var(--squiggle-opacity);
   mix-blend-mode: multiply;
+  filter: url("#brush-roughen");
   transform:
     translate3d(0, 0, 0)
     rotate(var(--squiggle-rotation));
@@ -91,10 +99,10 @@ main {
 .squiggle path {
   fill: none;
   stroke: currentColor;
-  stroke-linecap: round;
+  stroke-linecap: butt;
   stroke-linejoin: round;
   stroke-width: var(--squiggle-stroke);
-  stroke-opacity: 0.82;
+  stroke-opacity: 0.7;
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
   opacity: 0;
@@ -102,6 +110,33 @@ main {
   animation: squiggle-draw var(--squiggle-speed) ease-in-out infinite;
   animation-delay: var(--squiggle-delay);
   will-change: stroke-dashoffset, opacity;
+}
+
+.squiggle .brush-wash {
+  stroke: rgba(88, 169, 226, 0.26);
+  stroke-width: calc(var(--squiggle-stroke) * 2.15);
+  stroke-opacity: 0.52;
+}
+
+.squiggle .brush-core {
+  stroke: rgba(15, 102, 190, 0.52);
+  stroke-width: var(--squiggle-stroke);
+}
+
+.squiggle .brush-dry {
+  stroke: rgba(215, 238, 252, 0.58);
+  stroke-width: calc(var(--squiggle-stroke) * 0.34);
+  stroke-dasharray: 0.018 0.018 0.042 0.026 0.012 0.034;
+  stroke-opacity: 0.62;
+  animation-name: squiggle-dry-draw;
+}
+
+.squiggle .brush-bristle {
+  stroke: rgba(5, 82, 162, 0.26);
+  stroke-width: calc(var(--squiggle-stroke) * 0.2);
+  stroke-dasharray: 0.025 0.028 0.014 0.04;
+  stroke-opacity: 0.52;
+  animation-name: squiggle-dry-draw;
 }
 
 .squiggle--one {
@@ -254,6 +289,32 @@ main {
   74% {
     stroke-dashoffset: 0;
     opacity: 0.78;
+  }
+
+  100% {
+    stroke-dashoffset: -1;
+    opacity: 0;
+  }
+}
+
+@keyframes squiggle-dry-draw {
+  0% {
+    stroke-dashoffset: 1;
+    opacity: 0;
+  }
+
+  18% {
+    opacity: 0.28;
+  }
+
+  50% {
+    stroke-dashoffset: 0;
+    opacity: 0.72;
+  }
+
+  74% {
+    stroke-dashoffset: -0.1;
+    opacity: 0.48;
   }
 
   100% {
@@ -670,7 +731,7 @@ main {
   }
 
   .squiggle {
-    color: rgba(24, 116, 198, 0.2);
+    color: rgba(21, 107, 192, 0.23);
   }
 
   .squiggle--one {
@@ -741,5 +802,10 @@ main {
     animation: none !important;
     opacity: 0.55;
     stroke-dashoffset: 0;
+  }
+
+  .squiggle .brush-dry,
+  .squiggle .brush-bristle {
+    opacity: 0.35;
   }
 }

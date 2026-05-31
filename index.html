@@ -43,9 +43,29 @@
         ]
       }
     </script>
-    <link rel="stylesheet" href="styles.css?v=squiggles-4">
+    <link rel="stylesheet" href="styles.css?v=brush-squiggles-1">
   </head>
   <body>
+    <svg class="squiggle-defs" width="0" height="0" aria-hidden="true" focusable="false">
+      <defs>
+        <filter id="brush-roughen" x="-14%" y="-30%" width="128%" height="160%">
+          <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.045 0.18"
+            numOctaves="2"
+            seed="11"
+            result="paintNoise"
+          ></feTurbulence>
+          <feDisplacementMap
+            in="SourceGraphic"
+            in2="paintNoise"
+            scale="3.6"
+            xChannelSelector="R"
+            yChannelSelector="G"
+          ></feDisplacementMap>
+        </filter>
+      </defs>
+    </svg>
     <div class="squiggle-field" aria-hidden="true">
       <svg class="squiggle squiggle--one" viewBox="0 0 260 150">
         <path pathLength="1" d="M9 92 C38 50 70 121 102 78 S160 42 181 91 229 120 252 54"></path>
@@ -125,6 +145,6 @@
       <img class="lightbox__image" data-lightbox-image alt="">
     </dialog>
 
-    <script src="script.js?v=squiggles-4"></script>
+    <script src="script.js?v=brush-squiggles-1"></script>
   </body>
 </html>
