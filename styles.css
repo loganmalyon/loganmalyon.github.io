@@ -135,10 +135,10 @@ main {
 
 .artist-intro {
   display: grid;
-  grid-template-columns: minmax(210px, 310px) minmax(360px, 660px);
+  grid-template-columns: minmax(210px, 310px) minmax(420px, 760px);
   align-items: center;
   gap: clamp(22px, 4vw, 54px);
-  width: min(100%, 1080px);
+  width: min(100%, 1180px);
   margin-top: 28px;
 }
 
@@ -162,9 +162,9 @@ main {
     "Bradley Hand",
     "Segoe Print",
     cursive;
-  font-size: 1.5rem;
+  font-size: 1.9rem;
   font-weight: 400;
-  line-height: 1.42;
+  line-height: 1.28;
 }
 
 .artist-bio p {
@@ -506,7 +506,8 @@ main {
 
   .artist-bio {
     max-width: 34rem;
-    font-size: 1.28rem;
+    font-size: 1.58rem;
+    line-height: 1.25;
   }
 
   .artist-links {
