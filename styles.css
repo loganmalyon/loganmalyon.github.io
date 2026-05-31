@@ -127,7 +127,7 @@ main {
     "Bradley Hand",
     "Segoe Print",
     cursive;
-  font-size: 3.05rem;
+  font-size: 3.65rem;
   font-weight: 400;
   line-height: 1.2;
   text-decoration: none;
@@ -162,9 +162,9 @@ main {
     "Bradley Hand",
     "Segoe Print",
     cursive;
-  font-size: 0.98rem;
+  font-size: 1.14rem;
   font-weight: 400;
-  line-height: 1.75;
+  line-height: 1.62;
 }
 
 .artist-bio p {
@@ -488,7 +488,7 @@ main {
   }
 
   .site-title {
-    font-size: 1.72rem;
+    font-size: 2.05rem;
   }
 
   .artist-intro {
@@ -506,7 +506,7 @@ main {
 
   .artist-bio {
     max-width: 34rem;
-    font-size: 0.92rem;
+    font-size: 1.04rem;
   }
 
   .artist-links {
