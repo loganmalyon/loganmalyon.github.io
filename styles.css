@@ -150,13 +150,13 @@ main {
 .artist-bio {
   color: #32403f;
   font-family:
+    "Trebuchet MS",
+    "Gill Sans",
     "Avenir Next",
-    Avenir,
-    "Helvetica Neue",
     Arial,
     sans-serif;
-  font-size: clamp(1rem, 1.2vw, 1.13rem);
-  line-height: 1.58;
+  font-size: clamp(1.02rem, 1.22vw, 1.16rem);
+  line-height: 1.64;
 }
 
 .artist-bio p {
