@@ -80,8 +80,9 @@ main {
   position: absolute;
   width: var(--squiggle-size);
   height: auto;
-  color: rgba(45, 78, 84, 0.14);
+  color: rgba(24, 116, 198, 0.28);
   opacity: var(--squiggle-opacity);
+  mix-blend-mode: multiply;
   transform:
     translate3d(0, 0, 0)
     rotate(var(--squiggle-rotation));
@@ -93,6 +94,7 @@ main {
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: var(--squiggle-stroke);
+  stroke-opacity: 0.82;
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
   opacity: 0;
@@ -103,10 +105,10 @@ main {
 }
 
 .squiggle--one {
-  --squiggle-size: clamp(210px, 24vw, 360px);
-  --squiggle-opacity: 0.48;
+  --squiggle-size: clamp(280px, 34vw, 540px);
+  --squiggle-opacity: 0.68;
   --squiggle-rotation: -7deg;
-  --squiggle-stroke: 1.2;
+  --squiggle-stroke: 5.6;
   --squiggle-speed: 12s;
   --squiggle-delay: -1s;
   top: 11vh;
@@ -114,10 +116,10 @@ main {
 }
 
 .squiggle--two {
-  --squiggle-size: clamp(160px, 19vw, 270px);
-  --squiggle-opacity: 0.39;
+  --squiggle-size: clamp(230px, 28vw, 420px);
+  --squiggle-opacity: 0.58;
   --squiggle-rotation: 12deg;
-  --squiggle-stroke: 1.35;
+  --squiggle-stroke: 6.2;
   --squiggle-speed: 10s;
   --squiggle-delay: -5s;
   top: 23vh;
@@ -125,10 +127,10 @@ main {
 }
 
 .squiggle--three {
-  --squiggle-size: clamp(230px, 28vw, 430px);
-  --squiggle-opacity: 0.34;
+  --squiggle-size: clamp(320px, 38vw, 620px);
+  --squiggle-opacity: 0.54;
   --squiggle-rotation: 4deg;
-  --squiggle-stroke: 1.1;
+  --squiggle-stroke: 5.4;
   --squiggle-speed: 14s;
   --squiggle-delay: -7s;
   top: 49vh;
@@ -136,10 +138,10 @@ main {
 }
 
 .squiggle--four {
-  --squiggle-size: clamp(145px, 18vw, 260px);
-  --squiggle-opacity: 0.36;
+  --squiggle-size: clamp(220px, 26vw, 410px);
+  --squiggle-opacity: 0.56;
   --squiggle-rotation: -18deg;
-  --squiggle-stroke: 1.25;
+  --squiggle-stroke: 6.4;
   --squiggle-speed: 11s;
   --squiggle-delay: -3s;
   right: -2vw;
@@ -147,10 +149,10 @@ main {
 }
 
 .squiggle--five {
-  --squiggle-size: clamp(190px, 23vw, 340px);
-  --squiggle-opacity: 0.35;
+  --squiggle-size: clamp(270px, 32vw, 520px);
+  --squiggle-opacity: 0.52;
   --squiggle-rotation: 19deg;
-  --squiggle-stroke: 1.15;
+  --squiggle-stroke: 5.8;
   --squiggle-speed: 15s;
   --squiggle-delay: -9s;
   bottom: 5vh;
@@ -158,14 +160,80 @@ main {
 }
 
 .squiggle--six {
-  --squiggle-size: clamp(170px, 20vw, 300px);
-  --squiggle-opacity: 0.3;
+  --squiggle-size: clamp(240px, 29vw, 450px);
+  --squiggle-opacity: 0.5;
   --squiggle-rotation: -3deg;
-  --squiggle-stroke: 1.2;
+  --squiggle-stroke: 5.2;
   --squiggle-speed: 13s;
   --squiggle-delay: -11s;
   top: 72vh;
   right: 20vw;
+}
+
+.squiggle--seven {
+  --squiggle-size: clamp(310px, 36vw, 590px);
+  --squiggle-opacity: 0.48;
+  --squiggle-rotation: -12deg;
+  --squiggle-stroke: 6;
+  --squiggle-speed: 16s;
+  --squiggle-delay: -4s;
+  top: 7vh;
+  right: -12vw;
+}
+
+.squiggle--eight {
+  --squiggle-size: clamp(230px, 28vw, 460px);
+  --squiggle-opacity: 0.46;
+  --squiggle-rotation: 21deg;
+  --squiggle-stroke: 6.8;
+  --squiggle-speed: 13s;
+  --squiggle-delay: -8s;
+  top: 37vh;
+  left: -10vw;
+}
+
+.squiggle--nine {
+  --squiggle-size: clamp(340px, 40vw, 680px);
+  --squiggle-opacity: 0.44;
+  --squiggle-rotation: 8deg;
+  --squiggle-stroke: 5.5;
+  --squiggle-speed: 17s;
+  --squiggle-delay: -12s;
+  right: 10vw;
+  bottom: 35vh;
+}
+
+.squiggle--ten {
+  --squiggle-size: clamp(220px, 27vw, 440px);
+  --squiggle-opacity: 0.5;
+  --squiggle-rotation: -24deg;
+  --squiggle-stroke: 7.2;
+  --squiggle-speed: 12s;
+  --squiggle-delay: -6s;
+  right: 31vw;
+  bottom: 6vh;
+}
+
+.squiggle--eleven {
+  --squiggle-size: clamp(290px, 35vw, 560px);
+  --squiggle-opacity: 0.42;
+  --squiggle-rotation: 14deg;
+  --squiggle-stroke: 6.1;
+  --squiggle-speed: 15s;
+  --squiggle-delay: -2s;
+  top: 58vh;
+  left: 39vw;
+}
+
+.squiggle--twelve {
+  --squiggle-size: clamp(260px, 30vw, 500px);
+  --squiggle-opacity: 0.47;
+  --squiggle-rotation: -5deg;
+  --squiggle-stroke: 5.9;
+  --squiggle-speed: 14s;
+  --squiggle-delay: -10s;
+  top: 82vh;
+  left: 15vw;
 }
 
 @keyframes squiggle-draw {
@@ -602,7 +670,7 @@ main {
   }
 
   .squiggle {
-    color: rgba(45, 78, 84, 0.1);
+    color: rgba(24, 116, 198, 0.2);
   }
 
   .squiggle--one {
