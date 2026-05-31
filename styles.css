@@ -19,6 +19,7 @@ html {
 }
 
 body {
+  position: relative;
   min-height: 100vh;
   margin: 0;
   color: var(--ink);
@@ -30,6 +31,7 @@ body {
     Times,
     serif;
   background: var(--paper);
+  overflow-x: hidden;
 }
 
 body::before {
@@ -58,6 +60,121 @@ body::before {
 
 button {
   font: inherit;
+}
+
+.site-header,
+main {
+  position: relative;
+  z-index: 1;
+}
+
+.squiggle-field {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.squiggle {
+  position: absolute;
+  width: var(--squiggle-size);
+  height: auto;
+  color: rgba(45, 78, 84, 0.13);
+  opacity: var(--squiggle-opacity);
+  transform:
+    translate3d(0, 0, 0)
+    rotate(var(--squiggle-rotation));
+  animation: squiggle-drift var(--squiggle-speed) ease-in-out infinite alternate;
+}
+
+.squiggle path {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: var(--squiggle-stroke);
+  vector-effect: non-scaling-stroke;
+}
+
+.squiggle--one {
+  --squiggle-size: clamp(210px, 24vw, 360px);
+  --squiggle-opacity: 0.44;
+  --squiggle-rotation: -7deg;
+  --squiggle-stroke: 1.2;
+  --squiggle-speed: 54s;
+  --squiggle-drift-x: 28px;
+  --squiggle-drift-y: -18px;
+  top: 11vh;
+  left: -7vw;
+}
+
+.squiggle--two {
+  --squiggle-size: clamp(160px, 19vw, 270px);
+  --squiggle-opacity: 0.34;
+  --squiggle-rotation: 12deg;
+  --squiggle-stroke: 1.35;
+  --squiggle-speed: 48s;
+  --squiggle-drift-x: -22px;
+  --squiggle-drift-y: 30px;
+  top: 23vh;
+  right: 6vw;
+}
+
+.squiggle--three {
+  --squiggle-size: clamp(230px, 28vw, 430px);
+  --squiggle-opacity: 0.28;
+  --squiggle-rotation: 4deg;
+  --squiggle-stroke: 1.1;
+  --squiggle-speed: 62s;
+  --squiggle-drift-x: 34px;
+  --squiggle-drift-y: 20px;
+  top: 49vh;
+  left: 11vw;
+}
+
+.squiggle--four {
+  --squiggle-size: clamp(145px, 18vw, 260px);
+  --squiggle-opacity: 0.32;
+  --squiggle-rotation: -18deg;
+  --squiggle-stroke: 1.25;
+  --squiggle-speed: 57s;
+  --squiggle-drift-x: -30px;
+  --squiggle-drift-y: -24px;
+  right: -2vw;
+  bottom: 17vh;
+}
+
+.squiggle--five {
+  --squiggle-size: clamp(190px, 23vw, 340px);
+  --squiggle-opacity: 0.3;
+  --squiggle-rotation: 19deg;
+  --squiggle-stroke: 1.15;
+  --squiggle-speed: 68s;
+  --squiggle-drift-x: 25px;
+  --squiggle-drift-y: -30px;
+  bottom: 5vh;
+  left: 3vw;
+}
+
+.squiggle--six {
+  --squiggle-size: clamp(170px, 20vw, 300px);
+  --squiggle-opacity: 0.24;
+  --squiggle-rotation: -3deg;
+  --squiggle-stroke: 1.2;
+  --squiggle-speed: 52s;
+  --squiggle-drift-x: -20px;
+  --squiggle-drift-y: 24px;
+  top: 72vh;
+  right: 20vw;
+}
+
+@keyframes squiggle-drift {
+  to {
+    transform:
+      translate3d(var(--squiggle-drift-x), var(--squiggle-drift-y), 0)
+      rotate(calc(var(--squiggle-rotation) + 7deg));
+  }
 }
 
 .site-header {
@@ -467,6 +584,22 @@ button {
     padding-inline: 16px;
   }
 
+  .squiggle {
+    color: rgba(45, 78, 84, 0.1);
+  }
+
+  .squiggle--one {
+    left: -32vw;
+  }
+
+  .squiggle--two {
+    right: -20vw;
+  }
+
+  .squiggle--three {
+    left: -18vw;
+  }
+
   .gallery-shell {
     padding-top: 42px;
   }
@@ -517,5 +650,9 @@ button {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+  }
+
+  .squiggle {
+    animation: none !important;
   }
 }
