@@ -1,3 +1,13 @@
+@font-face {
+  font-family: "Cactus Jack";
+  src:
+    url("Cactus-Jack-Font/Web%20Fonts/cactus_jack-webfont.woff2") format("woff2"),
+    url("Cactus-Jack-Font/Web%20Fonts/cactus_jack-webfont.woff") format("woff");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
 :root {
   color-scheme: light;
   --paper: #effaff;
@@ -113,7 +123,7 @@ main {
 .site-title {
   color: inherit;
   font-family:
-    "Rock Salt",
+    "Cactus Jack",
     "Bradley Hand",
     "Segoe Print",
     cursive;
@@ -148,7 +158,7 @@ main {
 .artist-bio {
   color: #32403f;
   font-family:
-    "Rock Salt",
+    "Cactus Jack",
     "Bradley Hand",
     "Segoe Print",
     cursive;

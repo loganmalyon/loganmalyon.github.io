@@ -2,3 +2,5 @@
 .venv/
 __pycache__/
 *.pyc
+Cactus-Jack-Font/Fonts/
+Cactus-Jack-Font/Web Fonts/cactus_jack_alternate-webfont.*
