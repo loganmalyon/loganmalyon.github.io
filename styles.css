@@ -150,13 +150,13 @@ main {
 .artist-bio {
   color: #32403f;
   font-family:
-    "Trebuchet MS",
-    "Gill Sans",
-    "Avenir Next",
-    Arial,
-    sans-serif;
-  font-size: clamp(1.02rem, 1.22vw, 1.16rem);
-  line-height: 1.64;
+    Kalam,
+    "Bradley Hand",
+    "Segoe Print",
+    cursive;
+  font-size: clamp(1.13rem, 1.38vw, 1.34rem);
+  font-weight: 400;
+  line-height: 1.48;
 }
 
 .artist-bio p {
