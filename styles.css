@@ -80,12 +80,13 @@ main {
   position: absolute;
   width: var(--squiggle-size);
   height: auto;
-  color: rgba(45, 78, 84, 0.13);
+  color: rgba(45, 78, 84, 0.14);
   opacity: var(--squiggle-opacity);
   transform:
     translate3d(0, 0, 0)
     rotate(var(--squiggle-rotation));
   animation: squiggle-drift var(--squiggle-speed) ease-in-out infinite alternate;
+  will-change: transform;
 }
 
 .squiggle path {
@@ -99,81 +100,99 @@ main {
 
 .squiggle--one {
   --squiggle-size: clamp(210px, 24vw, 360px);
-  --squiggle-opacity: 0.44;
+  --squiggle-opacity: 0.48;
   --squiggle-rotation: -7deg;
   --squiggle-stroke: 1.2;
-  --squiggle-speed: 54s;
-  --squiggle-drift-x: 28px;
-  --squiggle-drift-y: -18px;
+  --squiggle-speed: 26s;
+  --squiggle-bend-x: 43px;
+  --squiggle-bend-y: 15px;
+  --squiggle-drift-x: 78px;
+  --squiggle-drift-y: -44px;
   top: 11vh;
   left: -7vw;
 }
 
 .squiggle--two {
   --squiggle-size: clamp(160px, 19vw, 270px);
-  --squiggle-opacity: 0.34;
+  --squiggle-opacity: 0.39;
   --squiggle-rotation: 12deg;
   --squiggle-stroke: 1.35;
-  --squiggle-speed: 48s;
-  --squiggle-drift-x: -22px;
-  --squiggle-drift-y: 30px;
+  --squiggle-speed: 24s;
+  --squiggle-bend-x: -18px;
+  --squiggle-bend-y: -36px;
+  --squiggle-drift-x: -64px;
+  --squiggle-drift-y: 68px;
   top: 23vh;
   right: 6vw;
 }
 
 .squiggle--three {
   --squiggle-size: clamp(230px, 28vw, 430px);
-  --squiggle-opacity: 0.28;
+  --squiggle-opacity: 0.34;
   --squiggle-rotation: 4deg;
   --squiggle-stroke: 1.1;
-  --squiggle-speed: 62s;
-  --squiggle-drift-x: 34px;
-  --squiggle-drift-y: 20px;
+  --squiggle-speed: 31s;
+  --squiggle-bend-x: 52px;
+  --squiggle-bend-y: -24px;
+  --squiggle-drift-x: 96px;
+  --squiggle-drift-y: 54px;
   top: 49vh;
   left: 11vw;
 }
 
 .squiggle--four {
   --squiggle-size: clamp(145px, 18vw, 260px);
-  --squiggle-opacity: 0.32;
+  --squiggle-opacity: 0.36;
   --squiggle-rotation: -18deg;
   --squiggle-stroke: 1.25;
-  --squiggle-speed: 57s;
-  --squiggle-drift-x: -30px;
-  --squiggle-drift-y: -24px;
+  --squiggle-speed: 28s;
+  --squiggle-bend-x: -46px;
+  --squiggle-bend-y: 20px;
+  --squiggle-drift-x: -82px;
+  --squiggle-drift-y: -58px;
   right: -2vw;
   bottom: 17vh;
 }
 
 .squiggle--five {
   --squiggle-size: clamp(190px, 23vw, 340px);
-  --squiggle-opacity: 0.3;
+  --squiggle-opacity: 0.35;
   --squiggle-rotation: 19deg;
   --squiggle-stroke: 1.15;
-  --squiggle-speed: 68s;
-  --squiggle-drift-x: 25px;
-  --squiggle-drift-y: -30px;
+  --squiggle-speed: 34s;
+  --squiggle-bend-x: 28px;
+  --squiggle-bend-y: 38px;
+  --squiggle-drift-x: 70px;
+  --squiggle-drift-y: -72px;
   bottom: 5vh;
   left: 3vw;
 }
 
 .squiggle--six {
   --squiggle-size: clamp(170px, 20vw, 300px);
-  --squiggle-opacity: 0.24;
+  --squiggle-opacity: 0.3;
   --squiggle-rotation: -3deg;
   --squiggle-stroke: 1.2;
-  --squiggle-speed: 52s;
-  --squiggle-drift-x: -20px;
-  --squiggle-drift-y: 24px;
+  --squiggle-speed: 29s;
+  --squiggle-bend-x: -32px;
+  --squiggle-bend-y: -22px;
+  --squiggle-drift-x: -62px;
+  --squiggle-drift-y: 60px;
   top: 72vh;
   right: 20vw;
 }
 
 @keyframes squiggle-drift {
+  45% {
+    transform:
+      translate3d(var(--squiggle-bend-x), var(--squiggle-bend-y), 0)
+      rotate(calc(var(--squiggle-rotation) + 5deg));
+  }
+
   to {
     transform:
       translate3d(var(--squiggle-drift-x), var(--squiggle-drift-y), 0)
-      rotate(calc(var(--squiggle-rotation) + 7deg));
+      rotate(calc(var(--squiggle-rotation) - 6deg));
   }
 }
 
