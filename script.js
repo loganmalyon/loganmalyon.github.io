@@ -66,23 +66,6 @@ function pick(values) {
   return values[Math.floor(Math.random() * values.length)];
 }
 
-function addBrushStrokeLayers() {
-  document.querySelectorAll(".squiggle path").forEach((path) => {
-    const parent = path.parentElement;
-    const wash = path.cloneNode();
-    const dry = path.cloneNode();
-    const bristle = path.cloneNode();
-
-    path.classList.add("brush-core");
-    wash.classList.add("brush-wash");
-    dry.classList.add("brush-dry");
-    bristle.classList.add("brush-bristle");
-
-    parent.prepend(wash);
-    parent.append(dry, bristle);
-  });
-}
-
 function createArtworkButton(src, index) {
   const button = document.createElement("button");
   const image = document.createElement("img");
@@ -264,8 +247,6 @@ async function closeLightbox() {
 
   lightbox.close();
 }
-
-addBrushStrokeLayers();
 
 shuffle(artworks).forEach((src, index) => {
   gallery.append(createArtworkButton(src, index));

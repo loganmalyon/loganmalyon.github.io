@@ -68,14 +68,7 @@ main {
   z-index: 1;
 }
 
-.squiggle-defs {
-  position: absolute;
-  width: 0;
-  height: 0;
-  overflow: hidden;
-}
-
-.squiggle-field {
+.paint-stroke-field {
   position: fixed;
   inset: 0;
   z-index: 0;
@@ -83,243 +76,31 @@ main {
   pointer-events: none;
 }
 
-.squiggle {
+.paint-stroke {
   position: absolute;
-  width: var(--squiggle-size);
-  height: auto;
-  color: rgba(21, 107, 192, 0.3);
-  opacity: var(--squiggle-opacity);
+  top: clamp(80px, 16vh, 190px);
+  left: 50%;
+  width: max(1900px, 180vw);
+  max-width: none;
+  opacity: 0.42;
   mix-blend-mode: multiply;
-  filter: url("#brush-roughen");
-  transform:
-    translate3d(0, 0, 0)
-    rotate(var(--squiggle-rotation));
+  transform: translateX(-50%) rotate(-5deg);
+  transform-origin: 50% 45%;
+  clip-path: inset(0 100% 0 0);
+  animation: paint-stroke-reveal 8s cubic-bezier(0.18, 0.86, 0.28, 1) 0.4s forwards;
+  will-change: clip-path;
 }
 
-.squiggle path {
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: butt;
-  stroke-linejoin: round;
-  stroke-width: var(--squiggle-stroke);
-  stroke-opacity: 0.7;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  opacity: 0;
-  vector-effect: non-scaling-stroke;
-  animation: squiggle-draw var(--squiggle-speed) ease-in-out infinite;
-  animation-delay: var(--squiggle-delay);
-  will-change: stroke-dashoffset, opacity;
+.paint-stroke img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: none;
 }
 
-.squiggle .brush-wash {
-  stroke: rgba(88, 169, 226, 0.26);
-  stroke-width: calc(var(--squiggle-stroke) * 2.15);
-  stroke-opacity: 0.52;
-}
-
-.squiggle .brush-core {
-  stroke: rgba(15, 102, 190, 0.52);
-  stroke-width: var(--squiggle-stroke);
-}
-
-.squiggle .brush-dry {
-  stroke: rgba(215, 238, 252, 0.58);
-  stroke-width: calc(var(--squiggle-stroke) * 0.34);
-  stroke-dasharray: 0.018 0.018 0.042 0.026 0.012 0.034;
-  stroke-opacity: 0.62;
-  animation-name: squiggle-dry-draw;
-}
-
-.squiggle .brush-bristle {
-  stroke: rgba(5, 82, 162, 0.26);
-  stroke-width: calc(var(--squiggle-stroke) * 0.2);
-  stroke-dasharray: 0.025 0.028 0.014 0.04;
-  stroke-opacity: 0.52;
-  animation-name: squiggle-dry-draw;
-}
-
-.squiggle--one {
-  --squiggle-size: clamp(280px, 34vw, 540px);
-  --squiggle-opacity: 0.68;
-  --squiggle-rotation: -7deg;
-  --squiggle-stroke: 5.6;
-  --squiggle-speed: 12s;
-  --squiggle-delay: -1s;
-  top: 11vh;
-  left: -7vw;
-}
-
-.squiggle--two {
-  --squiggle-size: clamp(230px, 28vw, 420px);
-  --squiggle-opacity: 0.58;
-  --squiggle-rotation: 12deg;
-  --squiggle-stroke: 6.2;
-  --squiggle-speed: 10s;
-  --squiggle-delay: -5s;
-  top: 23vh;
-  right: 6vw;
-}
-
-.squiggle--three {
-  --squiggle-size: clamp(320px, 38vw, 620px);
-  --squiggle-opacity: 0.54;
-  --squiggle-rotation: 4deg;
-  --squiggle-stroke: 5.4;
-  --squiggle-speed: 14s;
-  --squiggle-delay: -7s;
-  top: 49vh;
-  left: 11vw;
-}
-
-.squiggle--four {
-  --squiggle-size: clamp(220px, 26vw, 410px);
-  --squiggle-opacity: 0.56;
-  --squiggle-rotation: -18deg;
-  --squiggle-stroke: 6.4;
-  --squiggle-speed: 11s;
-  --squiggle-delay: -3s;
-  right: -2vw;
-  bottom: 17vh;
-}
-
-.squiggle--five {
-  --squiggle-size: clamp(270px, 32vw, 520px);
-  --squiggle-opacity: 0.52;
-  --squiggle-rotation: 19deg;
-  --squiggle-stroke: 5.8;
-  --squiggle-speed: 15s;
-  --squiggle-delay: -9s;
-  bottom: 5vh;
-  left: 3vw;
-}
-
-.squiggle--six {
-  --squiggle-size: clamp(240px, 29vw, 450px);
-  --squiggle-opacity: 0.5;
-  --squiggle-rotation: -3deg;
-  --squiggle-stroke: 5.2;
-  --squiggle-speed: 13s;
-  --squiggle-delay: -11s;
-  top: 72vh;
-  right: 20vw;
-}
-
-.squiggle--seven {
-  --squiggle-size: clamp(310px, 36vw, 590px);
-  --squiggle-opacity: 0.48;
-  --squiggle-rotation: -12deg;
-  --squiggle-stroke: 6;
-  --squiggle-speed: 16s;
-  --squiggle-delay: -4s;
-  top: 7vh;
-  right: -12vw;
-}
-
-.squiggle--eight {
-  --squiggle-size: clamp(230px, 28vw, 460px);
-  --squiggle-opacity: 0.46;
-  --squiggle-rotation: 21deg;
-  --squiggle-stroke: 6.8;
-  --squiggle-speed: 13s;
-  --squiggle-delay: -8s;
-  top: 37vh;
-  left: -10vw;
-}
-
-.squiggle--nine {
-  --squiggle-size: clamp(340px, 40vw, 680px);
-  --squiggle-opacity: 0.44;
-  --squiggle-rotation: 8deg;
-  --squiggle-stroke: 5.5;
-  --squiggle-speed: 17s;
-  --squiggle-delay: -12s;
-  right: 10vw;
-  bottom: 35vh;
-}
-
-.squiggle--ten {
-  --squiggle-size: clamp(220px, 27vw, 440px);
-  --squiggle-opacity: 0.5;
-  --squiggle-rotation: -24deg;
-  --squiggle-stroke: 7.2;
-  --squiggle-speed: 12s;
-  --squiggle-delay: -6s;
-  right: 31vw;
-  bottom: 6vh;
-}
-
-.squiggle--eleven {
-  --squiggle-size: clamp(290px, 35vw, 560px);
-  --squiggle-opacity: 0.42;
-  --squiggle-rotation: 14deg;
-  --squiggle-stroke: 6.1;
-  --squiggle-speed: 15s;
-  --squiggle-delay: -2s;
-  top: 58vh;
-  left: 39vw;
-}
-
-.squiggle--twelve {
-  --squiggle-size: clamp(260px, 30vw, 500px);
-  --squiggle-opacity: 0.47;
-  --squiggle-rotation: -5deg;
-  --squiggle-stroke: 5.9;
-  --squiggle-speed: 14s;
-  --squiggle-delay: -10s;
-  top: 82vh;
-  left: 15vw;
-}
-
-@keyframes squiggle-draw {
-  0% {
-    stroke-dashoffset: 1;
-    opacity: 0;
-  }
-
-  14% {
-    opacity: 0.45;
-  }
-
-  48% {
-    stroke-dashoffset: 0;
-    opacity: 1;
-  }
-
-  74% {
-    stroke-dashoffset: 0;
-    opacity: 0.78;
-  }
-
-  100% {
-    stroke-dashoffset: -1;
-    opacity: 0;
-  }
-}
-
-@keyframes squiggle-dry-draw {
-  0% {
-    stroke-dashoffset: 1;
-    opacity: 0;
-  }
-
-  18% {
-    opacity: 0.28;
-  }
-
-  50% {
-    stroke-dashoffset: 0;
-    opacity: 0.72;
-  }
-
-  74% {
-    stroke-dashoffset: -0.1;
-    opacity: 0.48;
-  }
-
-  100% {
-    stroke-dashoffset: -1;
-    opacity: 0;
+@keyframes paint-stroke-reveal {
+  to {
+    clip-path: inset(0 0 0 0);
   }
 }
 
@@ -730,20 +511,11 @@ main {
     padding-inline: 16px;
   }
 
-  .squiggle {
-    color: rgba(21, 107, 192, 0.23);
-  }
-
-  .squiggle--one {
-    left: -32vw;
-  }
-
-  .squiggle--two {
-    right: -20vw;
-  }
-
-  .squiggle--three {
-    left: -18vw;
+  .paint-stroke {
+    top: 27vh;
+    width: max(1320px, 330vw);
+    opacity: 0.36;
+    transform: translateX(-49%) rotate(-8deg);
   }
 
   .gallery-shell {
@@ -798,14 +570,8 @@ main {
     animation-iteration-count: 1 !important;
   }
 
-  .squiggle path {
+  .paint-stroke {
     animation: none !important;
-    opacity: 0.55;
-    stroke-dashoffset: 0;
-  }
-
-  .squiggle .brush-dry,
-  .squiggle .brush-bristle {
-    opacity: 0.35;
+    clip-path: inset(0 0 0 0);
   }
 }

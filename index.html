@@ -43,66 +43,13 @@
         ]
       }
     </script>
-    <link rel="stylesheet" href="styles.css?v=brush-squiggles-1">
+    <link rel="stylesheet" href="styles.css?v=paint-stroke-1">
   </head>
   <body>
-    <svg class="squiggle-defs" width="0" height="0" aria-hidden="true" focusable="false">
-      <defs>
-        <filter id="brush-roughen" x="-14%" y="-30%" width="128%" height="160%">
-          <feTurbulence
-            type="fractalNoise"
-            baseFrequency="0.045 0.18"
-            numOctaves="2"
-            seed="11"
-            result="paintNoise"
-          ></feTurbulence>
-          <feDisplacementMap
-            in="SourceGraphic"
-            in2="paintNoise"
-            scale="3.6"
-            xChannelSelector="R"
-            yChannelSelector="G"
-          ></feDisplacementMap>
-        </filter>
-      </defs>
-    </svg>
-    <div class="squiggle-field" aria-hidden="true">
-      <svg class="squiggle squiggle--one" viewBox="0 0 260 150">
-        <path pathLength="1" d="M9 92 C38 50 70 121 102 78 S160 42 181 91 229 120 252 54"></path>
-      </svg>
-      <svg class="squiggle squiggle--two" viewBox="0 0 220 180">
-        <path pathLength="1" d="M30 18 C93 45 10 89 73 111 S157 77 177 123 134 166 199 158"></path>
-      </svg>
-      <svg class="squiggle squiggle--three" viewBox="0 0 300 130">
-        <path pathLength="1" d="M14 72 C51 27 89 90 122 54 S179 28 207 68 248 105 286 47"></path>
-      </svg>
-      <svg class="squiggle squiggle--four" viewBox="0 0 210 210">
-        <path pathLength="1" d="M90 18 C33 48 138 76 76 111 S46 176 109 161 169 177 181 108"></path>
-      </svg>
-      <svg class="squiggle squiggle--five" viewBox="0 0 260 170">
-        <path pathLength="1" d="M22 130 C62 77 96 155 134 101 S180 30 223 70 218 128 244 148"></path>
-      </svg>
-      <svg class="squiggle squiggle--six" viewBox="0 0 240 150">
-        <path pathLength="1" d="M15 43 C58 83 84 10 121 57 S162 139 199 91 207 36 228 25"></path>
-      </svg>
-      <svg class="squiggle squiggle--seven" viewBox="0 0 320 180">
-        <path pathLength="1" d="M19 142 C76 72 111 169 161 95 S230 23 298 80"></path>
-      </svg>
-      <svg class="squiggle squiggle--eight" viewBox="0 0 250 240">
-        <path pathLength="1" d="M89 20 C26 74 154 94 76 145 S105 224 188 171 138 82 224 57"></path>
-      </svg>
-      <svg class="squiggle squiggle--nine" viewBox="0 0 360 150">
-        <path pathLength="1" d="M18 55 C73 116 111 24 166 74 S249 131 337 54"></path>
-      </svg>
-      <svg class="squiggle squiggle--ten" viewBox="0 0 230 210">
-        <path pathLength="1" d="M31 185 C88 117 24 88 103 52 S185 37 150 103 199 153 217 76"></path>
-      </svg>
-      <svg class="squiggle squiggle--eleven" viewBox="0 0 300 200">
-        <path pathLength="1" d="M21 74 C73 15 103 141 158 79 S235 42 279 136"></path>
-      </svg>
-      <svg class="squiggle squiggle--twelve" viewBox="0 0 280 160">
-        <path pathLength="1" d="M18 111 C64 151 87 34 138 72 S190 133 255 36"></path>
-      </svg>
+    <div class="paint-stroke-field" aria-hidden="true">
+      <div class="paint-stroke">
+        <img src="assets/blue-brush-stroke.png" alt="">
+      </div>
     </div>
     <header class="site-header" aria-label="Site header">
       <a class="site-title" href="./" aria-label="Logan Malyon home">Logan Malyon</a>
@@ -145,6 +92,6 @@
       <img class="lightbox__image" data-lightbox-image alt="">
     </dialog>
 
-    <script src="script.js?v=brush-squiggles-1"></script>
+    <script src="script.js?v=paint-stroke-1"></script>
   </body>
 </html>
