@@ -1,4 +1,4 @@
-const artworkCount = 44;
+const artworkCount = 61;
 const artworks = Array.from(
   { length: artworkCount },
   (_, index) => `artwork/artwork-${String(index + 1).padStart(2, "0")}.webp`,
