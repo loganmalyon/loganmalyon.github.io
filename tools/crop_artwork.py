@@ -5,7 +5,7 @@ from PIL import Image, ImageFilter
 from scipy import ndimage
 
 
-SOURCE_DIR = Path("images")
+SOURCE_DIRS = (Path("images"), Path("linos"))
 OUTPUT_DIR = Path("artwork")
 OUTPUT_SIZE = 1800
 
@@ -48,21 +48,21 @@ def crop_box_for(image):
     mask = alpha > 16
     mask = ndimage.binary_closing(mask, structure=np.ones((5, 5)))
     labels, count = ndimage.label(mask)
-    keep = np.zeros(mask.shape, dtype=bool)
     min_area = max(220, int(mask.size * 0.00008))
+    sizes = np.bincount(labels.ravel())
+    keep_labels = []
 
-    for label in range(1, count + 1):
-        rows, cols = np.where(labels == label)
-        if rows.size == 0:
+    for label, slices in enumerate(ndimage.find_objects(labels), start=1):
+        if slices is None:
             continue
 
-        height = rows.max() - rows.min() + 1
-        width = cols.max() - cols.min() + 1
-        if rows.size >= min_area and height >= 7 and width >= 7:
-            keep[labels == label] = True
+        row_slice, col_slice = slices
+        height = row_slice.stop - row_slice.start
+        width = col_slice.stop - col_slice.start
+        if sizes[label] >= min_area and height >= 7 and width >= 7:
+            keep_labels.append(label)
 
-    if not keep.any():
-        keep = mask
+    keep = np.isin(labels, keep_labels) if keep_labels else mask
 
     rows, cols = np.where(keep)
     if rows.size == 0 or cols.size == 0:
@@ -86,13 +86,18 @@ def save_cropped(source, target):
     return image.size, cropped.size
 
 
+def source_images():
+    for source_dir in SOURCE_DIRS:
+        yield from sorted(source_dir.glob("*.jpeg"))
+
+
 def main():
     OUTPUT_DIR.mkdir(exist_ok=True)
 
     for old_file in OUTPUT_DIR.glob("artwork-*.*"):
         old_file.unlink()
 
-    sources = sorted(SOURCE_DIR.glob("*.jpeg"))
+    sources = list(source_images())
     for index, source in enumerate(sources, start=1):
         target = OUTPUT_DIR / f"artwork-{index:02}.webp"
         original_size, cropped_size = save_cropped(source, target)
